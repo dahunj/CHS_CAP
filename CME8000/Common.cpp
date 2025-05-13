@@ -1899,9 +1899,7 @@ void CCommon::Set_UnloadPickerAirOff(int nNo)
 void CCommon::Set_UnloadPickerDownMulti(int nNo, int nCnt)
 {
 	DY_DATA_10 *pDY10 = g_objAJinAXL.Get_pDY10();
-
-
-#ifndef CHS_Z //AKC, CHS_W, CHS_KS
+	
 	if (nNo == 1) {
 		if (nCnt > 0) pDY10->oUnloadPickerDown01 = TRUE;
 		if (nCnt > 1) pDY10->oUnloadPickerDown02 = TRUE;
@@ -1935,35 +1933,7 @@ void CCommon::Set_UnloadPickerDownMulti(int nNo, int nCnt)
 	else if (nNo == 6) {
 		if (nCnt > 0) pDY10->oUnloadPickerDown06 = TRUE;
 	}
-#endif
 
-#ifdef CHS_Z
-	if (nNo == 1) {
-		if (nCnt > 0) pDY10->oUnloadPickerDown01 = TRUE;
-		if (nCnt > 1) pDY10->oUnloadPickerDown03 = TRUE;
-		if (nCnt > 2) pDY10->oUnloadPickerDown05 = TRUE;
-	}
-	else if (nNo == 2) {
-		if (nCnt > 0) pDY10->oUnloadPickerDown02 = TRUE;
-		if (nCnt > 1) pDY10->oUnloadPickerDown04 = TRUE;
-		if (nCnt > 2) pDY10->oUnloadPickerDown06 = TRUE;
-	}
-	else if (nNo == 3) {
-		if (nCnt > 0) pDY10->oUnloadPickerDown03 = TRUE;
-		if (nCnt > 1) pDY10->oUnloadPickerDown05 = TRUE;		
-	}
-	else if (nNo == 4) {
-		if (nCnt > 0) pDY10->oUnloadPickerDown04 = TRUE;
-		if (nCnt > 1) pDY10->oUnloadPickerDown06 = TRUE;		
-	}
-	else if (nNo == 5) {
-		if (nCnt > 0) pDY10->oUnloadPickerDown05 = TRUE;
-	}
-	else if (nNo == 6) {
-		if (nCnt > 0) pDY10->oUnloadPickerDown06 = TRUE;
-	}
-
-#endif
 
 
 	g_objAJinAXL.Write_Output(10);
@@ -1972,8 +1942,7 @@ void CCommon::Set_UnloadPickerDownMulti(int nNo, int nCnt)
 BOOL CCommon::Get_UnloadPickerDownMulti(int nNo, int nCnt)
 {
 	DX_DATA_10 *pDX10 = g_objAJinAXL.Get_pDX10();
-
-#ifndef CHS_Z //AKC, CHS_W, CHS_KS
+	
 	if (nNo == 1) {
 		if (nCnt > 0 && (pDX10->iUnloadPickerUp01 || !pDX10->iUnloadPickerDown01)) { gAlm.nUNPickerNo = 1; return FALSE; }
 		if (nCnt > 1 && (pDX10->iUnloadPickerUp02 || !pDX10->iUnloadPickerDown02)) { gAlm.nUNPickerNo = 2; return FALSE; }
@@ -2007,40 +1976,8 @@ BOOL CCommon::Get_UnloadPickerDownMulti(int nNo, int nCnt)
 	else if (nNo == 6) {
 		if (gData.nPickerUseCnt > 5) {if (nCnt > 0 && (pDX10->iUnloadPickerUp06 || !pDX10->iUnloadPickerDown06)) { gAlm.nUNPickerNo = 6; return FALSE; }}
 	}
-#endif
 
-#ifdef CHS_Z 
-	if (nNo == 1) 
-	{
-		if (nCnt > 0 && (pDX10->iUnloadPickerUp01 || !pDX10->iUnloadPickerDown01)) { gAlm.nUNPickerNo = 1; return FALSE; }
-		if (nCnt > 1 && (pDX10->iUnloadPickerUp03 || !pDX10->iUnloadPickerDown03)) { gAlm.nUNPickerNo = 3; return FALSE; }
-		if (nCnt > 2 && (pDX10->iUnloadPickerUp05 || !pDX10->iUnloadPickerDown05)) { gAlm.nUNPickerNo = 5; return FALSE; }
-	}
-	else if (nNo == 2) 
-	{
-		if (nCnt > 0 && (pDX10->iUnloadPickerUp02 || !pDX10->iUnloadPickerDown02)) { gAlm.nUNPickerNo = 2; return FALSE; }
-		if (nCnt > 1 && (pDX10->iUnloadPickerUp04 || !pDX10->iUnloadPickerDown04)) { gAlm.nUNPickerNo = 4; return FALSE; }
-		if (nCnt > 2 && (pDX10->iUnloadPickerUp06 || !pDX10->iUnloadPickerDown06)) { gAlm.nUNPickerNo = 6; return FALSE; }
-	}
-	else if (nNo == 3) 
-	{
-		if (nCnt > 0 && (pDX10->iUnloadPickerUp03 || !pDX10->iUnloadPickerDown03)) { gAlm.nUNPickerNo = 3; return FALSE; }
-		if (nCnt > 1 && (pDX10->iUnloadPickerUp05 || !pDX10->iUnloadPickerDown05)) { gAlm.nUNPickerNo = 5; return FALSE; }
-	}
-	else if (nNo == 4) 
-	{
-		if (nCnt > 0 && (pDX10->iUnloadPickerUp04 || !pDX10->iUnloadPickerDown04)) { gAlm.nUNPickerNo = 4; return FALSE; }
-		if (nCnt > 1 && (pDX10->iUnloadPickerUp06 || !pDX10->iUnloadPickerDown06)) { gAlm.nUNPickerNo = 6; return FALSE; }
-	}
-	else if (nNo == 5) 
-	{
-		if (nCnt > 0 && (pDX10->iUnloadPickerUp05 || !pDX10->iUnloadPickerDown05)) { gAlm.nUNPickerNo = 5; return FALSE; }
-	}
-	else if (nNo == 6) 
-	{
-		if (nCnt > 0 && (pDX10->iUnloadPickerUp06 || !pDX10->iUnloadPickerDown06)) { gAlm.nUNPickerNo = 6; return FALSE; }
-	}
-#endif
+
 	
 
 	return TRUE;
@@ -2053,7 +1990,6 @@ void CCommon::Set_UnloadPickerVacOffMulti(int nNo, int nCnt)
 #endif
 	DY_DATA_10 *pDY10 = g_objAJinAXL.Get_pDY10();
 
-#ifndef CHS_Z
 	if (nNo == 1) {
 		if (nCnt > 0) { pDY10->oUnloadPickerVac01 = FALSE; pDY10->oUnloadPickerAir01 = TRUE; }
 		if (nCnt > 1) { pDY10->oUnloadPickerVac02 = FALSE; pDY10->oUnloadPickerAir02 = TRUE; }
@@ -2087,37 +2023,8 @@ void CCommon::Set_UnloadPickerVacOffMulti(int nNo, int nCnt)
 	else if (nNo == 6) {
 		if (nCnt > 0) { pDY10->oUnloadPickerVac06 = FALSE; pDY10->oUnloadPickerAir06 = TRUE; }
 	}
-#endif
 
-#ifdef CHS_Z
-	if (nNo == 1) {
-		if (nCnt > 0) { pDY10->oUnloadPickerVac01 = FALSE; pDY10->oUnloadPickerAir01 = TRUE; }
-		if (nCnt > 1) { pDY10->oUnloadPickerVac03 = FALSE; pDY10->oUnloadPickerAir03 = TRUE; }
-		if (nCnt > 2) { pDY10->oUnloadPickerVac05 = FALSE; pDY10->oUnloadPickerAir05 = TRUE; }
-		if (nCnt > 3) { pDY10->oUnloadPickerVac04 = FALSE; pDY10->oUnloadPickerAir04 = TRUE; }
-	}
-	else if (nNo == 2) {
-		if (nCnt > 0) { pDY10->oUnloadPickerVac02 = FALSE; pDY10->oUnloadPickerAir02 = TRUE; }
-		if (nCnt > 1) { pDY10->oUnloadPickerVac04 = FALSE; pDY10->oUnloadPickerAir04 = TRUE; }
-		if (nCnt > 2) { pDY10->oUnloadPickerVac06 = FALSE; pDY10->oUnloadPickerAir06 = TRUE; }
-	}
-	else if (nNo == 3) {
-		if (nCnt > 0) { pDY10->oUnloadPickerVac03 = FALSE; pDY10->oUnloadPickerAir03 = TRUE; }
-		if (nCnt > 1) { pDY10->oUnloadPickerVac05 = FALSE; pDY10->oUnloadPickerAir05 = TRUE; }
-	}
-	else if (nNo == 4) {
-		if (nCnt > 0) { pDY10->oUnloadPickerVac04 = FALSE; pDY10->oUnloadPickerAir04 = TRUE; }
-		if (nCnt > 1) { pDY10->oUnloadPickerVac06 = FALSE; pDY10->oUnloadPickerAir06 = TRUE; }
-	}
-	else if (nNo == 5) {
-		if (nCnt > 0) { pDY10->oUnloadPickerVac05 = FALSE; pDY10->oUnloadPickerAir05 = TRUE; }
-	}
-	else if (nNo == 6) {
-		if (nCnt > 0) { pDY10->oUnloadPickerVac06 = FALSE; pDY10->oUnloadPickerAir06 = TRUE; }
-	}
 
-#endif
-	
 
 	g_objAJinAXL.Write_Output(10);
 }
@@ -2126,7 +2033,6 @@ BOOL CCommon::Get_UnloadPickerVacOffMulti(int nNo, int nCnt)
 {
 	DX_DATA_10 *pDX10 = g_objAJinAXL.Get_pDX10();
 
-#ifndef CHS_Z //AKC, CHS_W, CHS_KS
 	if (nNo == 1) {
 		if (nCnt > 0 && pDX10->iUnloadPickerVac01) return FALSE;
 		if (nCnt > 1 && pDX10->iUnloadPickerVac02) return FALSE;
@@ -2160,34 +2066,9 @@ BOOL CCommon::Get_UnloadPickerVacOffMulti(int nNo, int nCnt)
 	else if (nNo == 6) {
 		if (gData.nPickerUseCnt > 5){if (nCnt > 0 && pDX10->iUnloadPickerVac06) return FALSE;}
 	}
-#endif
 
-#ifdef CHS_Z
-	if (nNo == 1) {
-		if (nCnt > 0 && pDX10->iUnloadPickerVac01) return FALSE;
-		if (nCnt > 1 && pDX10->iUnloadPickerVac03) return FALSE;
-		if (nCnt > 2 && pDX10->iUnloadPickerVac05) return FALSE;
-	}
-	else if (nNo == 2) {
-		if (nCnt > 0 && pDX10->iUnloadPickerVac02) return FALSE;
-		if (nCnt > 1 && pDX10->iUnloadPickerVac04) return FALSE;
-		if (nCnt > 2 && pDX10->iUnloadPickerVac06) return FALSE;
-	}
-	else if (nNo == 3) {
-		if (nCnt > 0 && pDX10->iUnloadPickerVac03) return FALSE;
-		if (nCnt > 1 && pDX10->iUnloadPickerVac05) return FALSE;
-	}
-	else if (nNo == 4) {
-		if (nCnt > 0 && pDX10->iUnloadPickerVac04) return FALSE;
-		if (nCnt > 1 && pDX10->iUnloadPickerVac06) return FALSE;
-	}
-	else if (nNo == 5) {
-		if (nCnt > 0 && pDX10->iUnloadPickerVac05) return FALSE;
-	}
-	else if (nNo == 6) {
-		if (nCnt > 0 && pDX10->iUnloadPickerVac06) return FALSE;
-	}
-#endif
+
+
 
 	return TRUE;
 }
@@ -2196,7 +2077,6 @@ void CCommon::Set_UnloadPickerAirOffMulti(int nNo, int nCnt)
 {
 	DY_DATA_10 *pDY10 = g_objAJinAXL.Get_pDY10();
 
-#ifndef CHS_Z //AKC, CHS_KS, CHS_W
 	if (nNo == 1) {
 		if (nCnt > 0) pDY10->oUnloadPickerAir01 = FALSE;
 		if (nCnt > 1) pDY10->oUnloadPickerAir02 = FALSE;
@@ -2230,34 +2110,7 @@ void CCommon::Set_UnloadPickerAirOffMulti(int nNo, int nCnt)
 	else if (nNo == 6) {
 		if (nCnt > 0) pDY10->oUnloadPickerAir06 = FALSE;
 	}
-#endif
 
-#ifdef CHS_Z
-	if (nNo == 1) {
-		if (nCnt > 0) pDY10->oUnloadPickerAir01 = FALSE;
-		if (nCnt > 1) pDY10->oUnloadPickerAir03 = FALSE;
-		if (nCnt > 2) pDY10->oUnloadPickerAir05 = FALSE;
-	}
-	else if (nNo == 2) {
-		if (nCnt > 0) pDY10->oUnloadPickerAir02 = FALSE;
-		if (nCnt > 1) pDY10->oUnloadPickerAir04 = FALSE;
-		if (nCnt > 2) pDY10->oUnloadPickerAir06 = FALSE;
-	}
-	else if (nNo == 3) {
-		if (nCnt > 0) pDY10->oUnloadPickerAir03 = FALSE;
-		if (nCnt > 1) pDY10->oUnloadPickerAir05 = FALSE;
-	}
-	else if (nNo == 4) {
-		if (nCnt > 0) pDY10->oUnloadPickerAir04 = FALSE;
-		if (nCnt > 1) pDY10->oUnloadPickerAir06 = FALSE;
-	}
-	else if (nNo == 5) {
-		if (nCnt > 0) pDY10->oUnloadPickerAir05 = FALSE;
-	}
-	else if (nNo == 6) {
-		if (nCnt > 0) pDY10->oUnloadPickerAir06 = FALSE;
-	}
-#endif
 	
 
 	g_objAJinAXL.Write_Output(10);

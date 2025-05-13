@@ -71,7 +71,7 @@
 	#pragma comment(lib, "CSGridR.lib")
 #endif
 
-#define MAIN_VERSION	_T("V 1.2.4")
+#define MAIN_VERSION	_T("V 1.2.6")
 #define SIM_WAITTIMES	 1		//
 #define SIM_WAITTIMEM	 1		//
 #define ECM_LOG			"D:\\EVMS\\TP\\log\\"
@@ -82,8 +82,8 @@
 
 //Universal CHS Cap attach 3가지 모델중 선택 
 //#define CHS_W
-//#define CHS_Z
-#define CHS_KS
+#define CHS_Z
+//#define CHS_KS
 //#define AKC
 
 // 테스트 런 옵션

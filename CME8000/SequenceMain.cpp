@@ -1294,27 +1294,13 @@ BOOL CSequenceMain::Select_UnloadPickerPos(int &nPos, int &nCnt)
 	for (int i = 0; i < gData.nPickerUseCnt; i++) { 
 		if (gData.InfoUnloadPick[i] > 0) { nPos = i; break; } 
 	}
-
-#ifndef CHS_Z // AKC, CHS_KS, CHS_W 
+	
 	for (int j = nPos; j < gData.nPickerUseCnt; j++) { 
 		if (gData.InfoUnloadPick[j] > 0)	nCnt++;
 		else								break;
 	}
 	if (nPos == -1 || nCnt == 0) return FALSE;
-#endif
-
-
-#ifdef CHS_Z
-	for (int j = nPos; j < gData.nPickerUseCnt; j=j+2) { 
-		if (gData.InfoUnloadPick[j] > 0)	nCnt++;
-		else								break;
-	}
-	if (nPos == -1 || nCnt == 0) return FALSE;
-
-	int nMaxCnt = gData.nPickerUseCnt / 2;
-	if (nCnt > nMaxCnt) nCnt = nMaxCnt;
-#endif
-
+	
 	return TRUE;
 }
 
@@ -6020,13 +6006,7 @@ BOOL CSequenceMain::UnloadPicker_Run()
 					nUpDownSu = ((nUpPickCnt < nUpTrayCnt) ? nUpPickCnt : nUpTrayCnt);
 					m_nUnloadPickMultiCnt = nUpDownSu;
 
-#ifndef CHS_Z //AKC, CHS_W, CHS_KS
 					dUpX = m_pMoveData->dUnloadPickerX[nUpWorkTray] - (nUpPosX - nUpStart) * m_pEquipData->dUnloadTrayPitchX;
-#endif
-
-#ifdef CHS_Z
-					dUpX = m_pMoveData->dUnloadPickerX[nUpWorkTray] - ((nUpPosX* m_pEquipData->dUnloadTrayPitchX) - (nUpStart* (m_pEquipData->dUnloadTrayPitchX/2))) ;
-#endif
 					if (nUpWorkTray == 1) dUpY = m_pMoveData->dUnloadStage1Y[1] + nUpPosY * m_pEquipData->dUnloadTrayPitchY;
 					if (nUpWorkTray == 2) dUpY = m_pMoveData->dUnloadStage2Y[1] + nUpPosY * m_pEquipData->dUnloadTrayPitchY;					
 
@@ -6077,14 +6057,9 @@ BOOL CSequenceMain::UnloadPicker_Run()
 				}
 				g_objLogFile.Save_CapLasLog(gData.sShipLotID, gData.sCIDUnloadPicker[i], gData.nPNoUnloadPick, gData.nTNoUnloadPick[nUpStart+i], gData.nCNoUnloadPick[nUpStart+i], nUpStart+i+1);
 
-#ifndef CHS_Z //AKC, CHS_KS, CHS_W
+
 				gData.InfoUnloadTray[nUpPosY][nUpPosX+i] = gData.InfoUnloadPick[nUpStart+i]; gData.InfoUnloadPick[nUpStart+i] = 0;
-#endif
 
-
-#ifdef CHS_Z
-				gData.InfoUnloadTray[nUpPosY][nUpPosX+i] = gData.InfoUnloadPick[nUpStart+(2*i)]; gData.InfoUnloadPick[nUpStart+(2*i)] = 0;
-#endif
 				gData.nTNoUnloadTray = gData.nTNoUnloadPick[nUpStart+i];
 				gData.nTNoUnloadPick[nUpStart+i] = gData.nCNoUnloadPick[nUpStart+i] = 0;
 				m_nUnloadLotCmCnt++;
