@@ -3198,7 +3198,7 @@ BOOL CSequenceMain::LoadPicker_Run()
 	case 17:	// 정보전달, Grip Open
 		if (g_objCommon.Check_Position(AX_LOAD_PICKER_Z, 3) && g_objCommon.Get_InfoLoadPickerDown(INFO_PICK)) 
 		{
-			if (!m_tLoadPickLoop.Waiting_Time(100)) break;			
+			if (!m_tLoadPickLoop.Waiting_Time(50)) break;			
 
 			for (int i = 0; i < gData.nPickerUseCnt; i++) 
 			{
@@ -3246,7 +3246,7 @@ BOOL CSequenceMain::LoadPicker_Run()
 			if (g_objCommon.Check_Position(AX_LOAD_PICKER_Z, 0) &&
 				g_objCommon.Get_LoadPickerUp() && g_objCommon.Get_LoadPickerCmCheckOff())
 			{
-				if(!m_tLoadPickLoop.Waiting_Time(300)) break;
+				//if(!m_tLoadPickLoop.Waiting_Time(300)) break;
 				m_pDY11->oIndexLoadAlignOut = FALSE;
 				g_objAJinAXL.Write_Output(11);
 								
